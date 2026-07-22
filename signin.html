@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E50914'%3E%3Cpath d='M5.5 2h3.5l5.5 20h-3.5z'/%3E%3Cpath d='M15 2h3.5l-5.5 20h-3.5z' opacity='0.7'/%3E%3C/svg%3E">
+  <style>
+    .signin-body {
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .signin-body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://picsum.photos/seed/netflixbg/1920/1080') center/cover no-repeat;
+      z-index: 0;
+    }
+    .signin-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 56px;
+      z-index: 2;
+    }
+    .signin-header .nav-logo {
+      font-size: 2.2rem;
+    }
+    .signin-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 450px;
+      padding: 60px 68px 40px;
+      background: rgba(0,0,0,0.75);
+      border-radius: 4px;
+      min-height: 520px;
+    }
+    .signin-container h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+      color: #fff;
+    }
+    .signin-error {
+      background: #e87c03;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .signin-error.show {
+      display: block;
+    }
+    .signin-input-group {
+      margin-bottom: 16px;
+    }
+    .signin-input-group input {
+      width: 100%;
+      padding: 16px 20px;
+      background: #333;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: background 0.2s;
+    }
+    .signin-input-group input:focus {
+      background: #454545;
+    }
+    .signin-input-group input::placeholder {
+      color: #8c8c8c;
+    }
+    .signin-btn {
+      width: 100%;
+      padding: 14px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 24px;
+    }
+    .signin-btn:hover {
+      background: #f40612;
+    }
+    .signin-extra {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #b3b3b3;
+    }
+    .signin-extra label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .signin-extra a {
+      color: #b3b3b3;
+      text-decoration: none;
+    }
+    .signin-extra a:hover {
+      text-decoration: underline;
+    }
+    .signin-footer-text {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: #737373;
+    }
+    .signin-footer-text a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .signin-footer-text a:hover {
+      text-decoration: underline;
+    }
+    .signin-footer-text .learn-more {
+      color: #0071eb;
+      cursor: pointer;
+    }
+    .signin-footer-text .learn-more:hover {
+      text-decoration: underline;
+    }
+    .signin-demo {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: #999;
+      text-align: center;
+    }
+    .signin-demo button {
+      background: none;
+      border: none;
+      color: #e50914;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: underline;
+      padding: 0;
+    }
+    .signin-demo button:hover {
+      color: #f40612;
+    }
+    .signin-copyright {
+      position: relative;
+      z-index: 1;
+      margin-top: 40px;
+      color: #737373;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .signin-header { padding: 20px; }
+      .signin-header .nav-logo { font-size: 1.6rem; }
+      .signin-container {
+        padding: 40px 20px;
+        max-width: 100%;
+        min-height: auto;
+        background: rgba(0,0,0,0.85);
+      }
+    }
+  </style>
+</head>
+<body class="signin-body">
+  <div class="signin-header">
+    <a href="index.html" class="nav-logo" aria-label="Netflix Home">NETFLIX</a>
+  </div>
+  <div class="signin-container">
+    <h1>Sign In</h1>
+    <div class="signin-error" id="signin-error">Please enter a valid email and password.</div>
+    <form id="signin-form" novalidate>
+      <div class="signin-input-group">
+        <input type="email" id="signin-email" placeholder="Email or phone number" required autocomplete="email" aria-label="Email">
+      </div>
+      <div class="signin-input-group">
+        <input type="password" id="signin-password" placeholder="Password" required autocomplete="current-password" aria-label="Password">
+      </div>
+      <button type="submit" class="signin-btn">Sign In</button>
+      <div class="signin-extra">
+        <label><input type="checkbox" checked> Remember me</label>
+        <a href="#">Need help?</a>
+      </div>
+      <div class="signin-footer-text">
+        New to Netflix? <a href="#">Sign up now</a>.
+        <br><br>
+        This page is protected by Google reCAPTCHA to ensure you're not a bot. <span class="learn-more">Learn more.</span>
+      </div>
+      <div class="signin-demo">
+        Demo mode: <button type="button" id="demo-signin-btn">Enter as Guest</button>
+      </div>
+    </form>
+  </div>
+  <div class="signin-copyright">&copy; 2026 Netflix Clone. All rights reserved.</div>
+
+  <script>
+    (function() {
+      var form = document.getElementById('signin-form');
+      var errorEl = document.getElementById('signin-error');
+      var emailInput = document.getElementById('signin-email');
+      var passwordInput = document.getElementById('signin-password');
+      var demoBtn = document.getElementById('demo-signin-btn');
+
+      var profileData = JSON.parse(localStorage.getItem('netflixProfile')) || null;
+
+      function doSignIn(email, displayName) {
+        var profile = {
+          email: email,
+          displayName: displayName || email.split('@')[0],
+          signedIn: true,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('netflixProfile', JSON.stringify(profile));
+        window.location.href = 'index.html';
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = emailInput.value.trim();
+        var password = passwordInput.value.trim();
+        if (!email || !password) {
+          errorEl.textContent = 'Please enter a valid email and password.';
+          errorEl.classList.add('show');
+          return;
+        }
+        if (!email.includes('@')) {
+          errorEl.textContent = 'Please enter a valid email address.';
+          errorEl.classList.add('show');
+          return;
+        }
+        errorEl.classList.remove('show');
+        doSignIn(email, email.split('@')[0]);
+      });
+
+      demoBtn.addEventListener('click', function() {
+        doSignIn('guest@netflix.demo', 'Guest');
+      });
+    })();
+  </script>
+</body>
+</html>

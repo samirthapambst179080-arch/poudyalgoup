@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New &amp; Popular - Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E50914'%3E%3Cpath d='M5.5 2h3.5l5.5 20h-3.5z'/%3E%3Cpath d='M15 2h3.5l-5.5 20h-3.5z' opacity='0.7'/%3E%3C/svg%3E">
+</head>
+<body data-page="newpopular">
+  <div id="loading-screen" class="loading-screen" role="status" aria-label="Loading"><div class="loading-logo">NETFLIX</div><div class="loading-spinner"></div></div>
+  <div id="scroll-progress" class="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="nav-logo" aria-label="Netflix Home">NETFLIX</a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="tv-shows.html" class="nav-link">TV Shows</a></li>
+          <li><a href="movies.html" class="nav-link">Movies</a></li>
+          <li><a href="new-popular.html" class="nav-link active">New &amp; Popular</a></li>
+          <li><a href="my-list.html" class="nav-link">My List</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <div class="search-container" role="search" aria-label="Search movies">
+          <button class="search-toggle" id="search-toggle" aria-label="Toggle search"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
+          <input type="text" id="search-input" class="search-input" placeholder="Titles, people, genres" aria-label="Search for movies">
+        </div>
+        <button class="nav-icon notification-btn" aria-label="Notifications"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></button>
+        <div class="profile-dropdown" id="profile-dropdown">
+          <button class="profile-btn" aria-label="User profile" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg></button>
+          <div class="dropdown-menu" role="menu">
+            <a role="menuitem" class="profile-email" style="color:#b3b3b3;font-size:0.8rem;cursor:default;pointer-events:none"></a><hr><a href="#" role="menuitem">Profile</a><a href="#" role="menuitem">Account</a><a href="#" role="menuitem">Help Center</a><hr><a href="#" role="menuitem" class="signout-link">Sign out of Netflix</a>
+          </div>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tv-shows.html">TV Shows</a></li>
+      <li><a href="movies.html">Movies</a></li>
+      <li><a href="new-popular.html">New &amp; Popular</a></li>
+      <li><a href="my-list.html">My List</a></li>
+    </ul>
+  </div>
+  <div style="height:var(--nav-height)"></div>
+  <main class="main-content" style="margin-top:0;padding-top:20px;">
+    <section class="movie-rows" id="movie-rows">
+      <div class="movie-row" data-category="trending"><div class="row-header"><h2 class="row-title">Trending Now</h2><div class="row-controls"><button class="row-btn prev-btn" aria-label="Previous">&#8249;</button><button class="row-btn next-btn" aria-label="Next">&#8250;</button></div></div><div class="row-container" id="row-trending"><div class="row-scroll"></div></div></div>
+      <div class="movie-row" data-category="popular"><div class="row-header"><h2 class="row-title">Popular on Netflix</h2><div class="row-controls"><button class="row-btn prev-btn" aria-label="Previous">&#8249;</button><button class="row-btn next-btn" aria-label="Next">&#8250;</button></div></div><div class="row-container" id="row-popular"><div class="row-scroll"></div></div></div>
+      <div class="movie-row" data-category="new"><div class="row-header"><h2 class="row-title">New Releases</h2><div class="row-controls"><button class="row-btn prev-btn" aria-label="Previous">&#8249;</button><button class="row-btn next-btn" aria-label="Next">&#8250;</button></div></div><div class="row-container" id="row-new"><div class="row-scroll"></div></div></div>
+    </section>
+    <section class="continue-watching" id="continue-watching"><div class="row-header"><h2 class="row-title">Continue Watching</h2></div><div class="row-container"><div class="row-scroll" id="continue-row"></div></div></section>
+    <section id="mylist-section" class="mylist-section"><div class="row-header"><h2 class="row-title">My List</h2></div><div class="mylist-grid" id="mylist-grid"></div></section>
+    <section id="search-results" class="search-results hidden"><div class="row-header"><h2 class="row-title">Search Results</h2></div><div class="search-grid" id="search-grid"></div><div id="no-results" class="no-results hidden">No results found</div></section>
+  </main>
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><a href="#">FAQ</a><a href="#">Investor Relations</a><a href="#">Privacy</a><a href="#">Speed Test</a></div>
+        <div class="footer-col"><a href="#">Help Center</a><a href="#">Jobs</a><a href="#">Cookie Preferences</a><a href="#">Legal Notices</a></div>
+        <div class="footer-col"><a href="#">Account</a><a href="#">Ways to Watch</a><a href="#">Corporate Information</a><a href="#">Only on Netflix</a></div>
+        <div class="footer-col"><a href="#">Media Center</a><a href="#">Terms of Use</a><a href="#">Contact Us</a></div>
+      </div>
+      <div class="footer-bottom">
+        <div class="language-selector"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><select id="language-select" aria-label="Language selection"><option value="en">English</option><option value="es">Espa&ntilde;ol</option><option value="fr">Fran&ccedil;ais</option></select></div>
+        <p class="footer-copyright">&copy; 2026 Netflix Clone. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+  <div id="movie-modal" class="modal" role="dialog" aria-modal="true" aria-label="Movie details">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      <div class="modal-backdrop"><div class="modal-backdrop-img"></div><div class="modal-backdrop-overlay"></div></div>
+      <div class="modal-body">
+        <div class="modal-poster"><img src="" alt="Movie poster" id="modal-poster-img" loading="lazy"></div>
+        <div class="modal-info">
+          <h2 id="modal-title" class="modal-title"></h2>
+          <div class="modal-meta"><span id="modal-year" class="modal-year"></span><span id="modal-rating" class="modal-rating-badge"></span><span id="modal-duration" class="modal-duration"></span><span id="modal-hd" class="modal-hd-badge">HD</span></div>
+          <div class="modal-actions">
+            <button class="btn btn-primary modal-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
+            <button class="btn btn-icon modal-add-btn" aria-label="Add to my list"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+            <button class="btn btn-icon modal-like-btn" aria-label="Like"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3z"/></svg></button>
+          </div>
+          <p id="modal-description" class="modal-description"></p>
+          <div class="modal-details"><p><strong>Cast:</strong> <span id="modal-cast"></span></p><p><strong>Genres:</strong> <span id="modal-genres"></span></p><p><strong>Rating:</strong> <span id="modal-rating-text"></span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
